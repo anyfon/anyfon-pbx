@@ -1,0 +1,20 @@
+spring:
+  config:
+    activate:
+      on-profile: dev
+
+  r2dbc:
+    url: r2dbc:mysql://10.0.103.35:3306/admin_asterisk
+    username: ${env.DEV_DB_USER}
+    password: ${env.DEV_DB_PASS}
+
+---
+spring:
+  config:
+    activate:
+      on-profile: default
+
+  r2dbc:
+    url: r2dbc:mysql://localhost:3306/asteriskcdrdb
+    username: ${env.DB_USER}
+    password: ${env.DB_PASS}

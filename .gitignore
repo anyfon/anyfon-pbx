@@ -1,0 +1,10 @@
+.node
+.idea
+.gradle
+gradle
+gardlew*
+build
+**/build
+**/node_modules
+**/.env
+tmp
