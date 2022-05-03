@@ -2,7 +2,7 @@ package ru.anyfon.pbx.manager.domain.calldetails.record
 
 import ru.anyfon.pbx.common.domain.ValueObject
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
-import ru.anyfon.pbx.common.domain.type.TenantId
+import ru.anyfon.pbx.common.domain.type.TenantID
 import ru.anyfon.pbx.manager.domain.calldetails.CallDirection
 import ru.anyfon.pbx.manager.domain.calldetails.CallId
 import ru.anyfon.pbx.manager.domain.calldetails.CallStatus
@@ -21,7 +21,7 @@ class CallDetailRecord(
     val callDuration: Int,
     val status: CallStatus,
     val hasRecord: Boolean,
-    val tenantId: TenantId,
+    val tenantId: TenantID,
     val trunkId: SipTrunk.ID?
 ) : ValueObject {
 

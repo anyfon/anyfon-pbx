@@ -1,7 +1,7 @@
 package ru.anyfon.pbx.manager.data.cdr
 
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
-import ru.anyfon.pbx.common.domain.type.TenantId
+import ru.anyfon.pbx.common.domain.type.TenantID
 import ru.anyfon.pbx.manager.domain.calldetails.CallDirection
 import ru.anyfon.pbx.manager.domain.calldetails.CallId
 import ru.anyfon.pbx.manager.domain.calldetails.CallStatus
@@ -22,7 +22,7 @@ class R2dbcCallDetailRecordRepository : CallDetailRecordRepository {
         callDuration: Int,
         status: CallStatus,
         hasRecord: Boolean,
-        tenantID: TenantId,
+        tenantID: TenantID,
         sipTrunkId: SipTrunk.ID,
         direction: CallDirection
     ) {
@@ -30,7 +30,7 @@ class R2dbcCallDetailRecordRepository : CallDetailRecordRepository {
     }
 
     override suspend fun findAll(
-        tenantID: TenantId,
+        tenantID: TenantID,
         dateFrom: LocalDateTime,
         dateTo: LocalDateTime,
         fromNumbers: List<PhoneNumber.Any>,

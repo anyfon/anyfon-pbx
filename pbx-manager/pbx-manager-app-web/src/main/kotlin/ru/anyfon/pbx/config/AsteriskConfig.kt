@@ -9,10 +9,10 @@ import ru.anyfon.pbx.asteriskcdr.AsteriskCdrExtractor
 class AsteriskConfig {
     private val cdrExtractor = AsteriskCdrExtractor.Base()
 
-    @Scheduled(fixedRate = 30_000)
-    fun loadCdr() {
-        runBlocking {
-            cdrExtractor.extractLast(171050)
-        }
-    }
+//    @Scheduled(fixedRate = 30_000)
+//    fun loadCdr() {
+//        runBlocking {
+//            cdrExtractor.extractLast(171050)
+//        }
+//    }
 }

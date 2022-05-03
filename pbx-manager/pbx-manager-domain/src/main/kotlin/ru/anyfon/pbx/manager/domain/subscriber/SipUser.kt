@@ -4,16 +4,14 @@ import ru.anyfon.pbx.common.domain.DomainEntity
 import ru.anyfon.pbx.common.domain.type.Email
 import ru.anyfon.pbx.common.domain.type.FullName
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
-import ru.anyfon.pbx.common.domain.type.TenantId
+import ru.anyfon.pbx.common.domain.type.TenantID
 
 class SipUser(
     val name: FullName,
     val number: PhoneNumber.Internal,
-    val tenantID: TenantId,
+    val tenantID: TenantID,
     val email: Email?
-) : DomainEntity.Abstract<SipUser>() {
+) : DomainEntity {
 
     val id = "$tenantID-$number"
-
-    override fun self(): SipUser = this
 }

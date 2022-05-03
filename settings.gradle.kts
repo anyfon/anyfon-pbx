@@ -6,6 +6,9 @@ include(":common:common-data-r2dbc")
 include(":common:common-web")
 
 include(":web:web-app")
+include(":web:web-starter-spring")
+include(":web:web-auth-domain")
+include(":web:web-auth-data-r2dbc")
 
 
 include(":asterisk-api:asterisk-api-app-web-spring")
