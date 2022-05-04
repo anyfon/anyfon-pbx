@@ -9,6 +9,7 @@ import {
     QItem,
     QList,
     QResizeObserver,
+    QRouteTab,
     QSplitter,
     QSeparator,
 
@@ -28,11 +29,12 @@ const components = {
     QItem,
     QList,
     QResizeObserver,
+    QRouteTab,
     QSplitter,
     QSeparator,
     QTab,
     QTabs,
-    QTable
+    QTable,
 }
 
 const plugins = {

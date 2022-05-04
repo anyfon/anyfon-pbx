@@ -17,7 +17,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import PageLayout from '@layout/PageLayout.vue'
+import PageLayout from '@main/layout/PageLayout.vue'
 import { QRouteTab } from 'quasar'
 
 export default defineComponent( {
