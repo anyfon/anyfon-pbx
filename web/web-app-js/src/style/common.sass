@@ -1,0 +1,64 @@
+html, body
+    @extend .full-height
+    overflow: hidden
+    padding: 0
+    margin: 0
+
+body
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important
+    font-weight: 300
+
+
+.body--light
+    @extend .bg-body--light, .text-body--light
+
+.body--light .bg-body, .bg-body--light
+    background-color: $body-bg-color
+
+.body--light .text-body, .text-body--light
+    color: $body-color
+
+
+
+.body--dark
+    @extend .bg-body--dark, .text-body--dark
+
+.body--dark .bg-body, .bg-body--dark
+    background-color: $body-dark-bg-color
+
+.body--dark .text-body, .text-body--dark
+    color: $body-dark-color
+
+.--header-label
+    font-weight: 400
+
+.has-header-account-block
+    height: 62px
+    margin-right: 80px
+
+.has-sidebar-toggle
+    height: 62px
+    &.--show-button
+        margin-left: 50px
+
+.clickable
+    cursor: pointer
+
+.form-field
+    border-radius: $form-field-border-radius !important
+    background-color: $form-field-bg-color !important
+
+#desktop-web-app
+    @extend .full-height
+
+.full-height
+    height: 100%
+
+.full-width
+    width: 100%
+
+.text-h1
+    font-size: 1.25rem !important
+
+.body--light .shadow-01
+    box-shadow: 0 0 7px -3px lighten($body-color, 30%)
