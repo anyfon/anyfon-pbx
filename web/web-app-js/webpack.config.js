@@ -19,7 +19,7 @@ const viewPath = path.resolve( mainPath, 'view' )
 
 const stylePath = path.resolve( basePath, 'src/style' )
 
-const distPath = path.resolve( basePath, '../../build/platform-app-js/dist' )
+const distPath = path.resolve( basePath, '../../build/web-app-js/dist' )
 
 const devConfig = {
     mode: 'development',

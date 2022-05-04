@@ -70,7 +70,10 @@ allprojects {
         }
     }
 
-    if (name != "common-web" && name.contains("-web")) {
+    if (
+        (name != "common-web" || !name.contains("js"))
+        && name.contains("-web")
+    ) {
         dependencies {
             add("api", project(":common:common-web"))
             //add("implementation", project(":web:web-app"))
