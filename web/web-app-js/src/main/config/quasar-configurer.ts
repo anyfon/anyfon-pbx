@@ -7,6 +7,8 @@ import {
     QIcon,
     QInput,
     QItem,
+    QItemLabel,
+    QItemSection,
     QList,
     QResizeObserver,
     QRouteTab,
@@ -16,6 +18,7 @@ import {
     QTab,
     QTabs,
     QTable,
+    QToggle,
 
     LocalStorage,
     Ripple
@@ -27,6 +30,8 @@ const components = {
     QIcon,
     QInput,
     QItem,
+    QItemLabel,
+    QItemSection,
     QList,
     QResizeObserver,
     QRouteTab,
@@ -35,6 +40,7 @@ const components = {
     QTab,
     QTabs,
     QTable,
+    QToggle
 }
 
 const plugins = {

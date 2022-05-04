@@ -1,5 +1,14 @@
 <template>
-    <div> Component - CallRecordPage</div>
+    <div class="full-height q-pa-sm row justify-center">
+        <div class="full-height content-inner q-pa-sm col-10">
+            <panel-splitter class="full-height" >
+                <template v-slot:sidebar>b</template>
+                <template v-slot:main>
+
+                </template>
+            </panel-splitter>
+        </div>
+    </div>
 </template>
 
 <script lang="ts">

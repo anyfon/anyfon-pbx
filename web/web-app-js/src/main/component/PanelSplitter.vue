@@ -47,13 +47,17 @@ export default defineComponent( {
     setup( props ) {
         const startResizeData = ref( undefined )
 
-        const sidebarWidth = ref( props.sidebarWidthPx || props.minSidebarSizePx != 0 ?
+        const sidebarWidthPx = props.sidebarWidthPx
+            ? Number.parseInt(props.sidebarWidthPx.toString())
+            : undefined
+
+        const sidebarWidth =  sidebarWidthPx || (props.minSidebarSizePx != 0 ?
             props.minSidebarSizePx :
-            DEFAULT_SIDEBAR_WIDTH )
+            DEFAULT_SIDEBAR_WIDTH)
 
         return {
             showSeparator: ref( !props.disableResize ),
-            sidebarWidth,
+            sidebarWidth: ref(sidebarWidth),
             startResizeData
         }
     },
@@ -100,7 +104,7 @@ export default defineComponent( {
         -webkit-user-select: none
 
     .panel-splitter__main
-        overflow-x: scroll
+        overflow: auto
 
     &.--active-resize
         cursor: col-resize
