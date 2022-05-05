@@ -3,13 +3,13 @@
         <q-tabs vertical no-caps>
             <q-route-tab to="/pbx">
                 <div class="column navigate-bar__item q-py-sm">
-                    <q-icon name="dialer_sip" size="36"/>
+                    <q-icon name="dialer_sip" size="36px"/>
                     <span class="text-caption __label">Звонки</span>
                 </div>
             </q-route-tab>
             <q-route-tab to="/administrate">
                 <div class="column navigate-bar__item q-py-sm">
-                    <q-icon name="o_admin_panel_settings" size="36"/>
+                    <q-icon name="o_admin_panel_settings" size="36px"/>
                     <span class="text-caption __label">Admin</span>
                 </div>
             </q-route-tab>

@@ -31,7 +31,7 @@ class WebSecurityConfig {
             .formLogin().and()
             .authorizeExchange()
             .pathMatchers("/login").permitAll()
-            .pathMatchers("/*").authenticated()
+            .pathMatchers("/**").authenticated()
             .and() //.addFilterAfter( this.authenticationWebFilter, SecurityWebFiltersOrder.REACTOR_CONTEXT )
             .build()
     }

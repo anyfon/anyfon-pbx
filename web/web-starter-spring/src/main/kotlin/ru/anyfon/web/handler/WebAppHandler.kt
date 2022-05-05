@@ -20,7 +20,7 @@ class WebAppHandler {
         builder.append("<html lang=\"en\">")
         builder.append("<head>")
         builder.append("<meta charset=\"UTF-8\">")
-        builder.append("<title>Ecom 24 Platform</title>")
+        builder.append("<title>Anyfon PBX</title>")
         builder.append("<link type=\"text/css\" rel=\"stylesheet\" href=\"$PATH_TO_APP_CSS\"/>")
         builder.append("</head>")
         builder.append("<body>")

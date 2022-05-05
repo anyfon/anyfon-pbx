@@ -71,7 +71,7 @@ allprojects {
     }
 
     if (
-        (name != "common-web" || !name.contains("js"))
+        !(name == "common-web" || name.contains("js"))
         && name.contains("-web")
     ) {
         dependencies {

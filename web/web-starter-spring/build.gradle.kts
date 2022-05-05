@@ -11,6 +11,7 @@ val appBuildDistPath = File(
             "dist"
 )
 
+
 val staticResourcePath = File(
     "${layout.projectDirectory}${File.separator}" +
             "src${File.separator}" +
@@ -22,7 +23,10 @@ val staticResourcePath = File(
 
 var copyAppTask = tasks.register<Copy>("_copyAppJS") {
     group = "build"
-    dependsOn(":web:web-app-js:build")
+    dependsOn(":web:web-app-js:buildAppJS")
+    doFirst {
+        staticResourcePath.delete()
+    }
     from(appBuildDistPath)
     into(staticResourcePath)
 }
@@ -30,4 +34,10 @@ var copyAppTask = tasks.register<Copy>("_copyAppJS") {
 tasks.register("_buildWithAppJS") {
     group = "build"
     dependsOn("build", "_copyAppJS")
+}
+
+tasks.clean {
+    doFirst {
+        staticResourcePath.delete()
+    }
 }

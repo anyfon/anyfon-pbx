@@ -23,3 +23,7 @@ dependencies {
 tasks.compileJava {
     options.release.set(8)
 }
+
+tasks.build {
+    dependsOn(":web:web-starter-spring:build")
+}
