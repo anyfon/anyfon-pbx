@@ -10,9 +10,9 @@ import ru.anyfon.web.auth.domain.user.UserRole
 
 @Table("usr")
 class UserEntity(
-    private val id: String = "",
+    private val id: String? = null,
     private val firstName: String = "",
-    private val middleName: String = "",
+    private val middleName: String? = null,
     private val lastName: String = "",
     private val email: String = "",
     private val phoneNumber: String = "",
@@ -20,12 +20,14 @@ class UserEntity(
     private val password: String = "",
     private val enabled: Boolean = false
 ) {
-    fun toUser(): User =
-
+    fun toUser(): User = id?.let {
         User(
             User.ID(id),
             NamePart(firstName),
-            ConvertUtils.tryOrNull { NamePart(middleName) },
+            ConvertUtils.tryOrNull {
+                middleName?.let {
+                    NamePart(middleName)
+                } },
             NamePart(lastName),
             UserRole(role),
             Email(email),
@@ -33,4 +35,7 @@ class UserEntity(
             password,
             enabled
         )
+    } ?: throw IllegalStateException(
+        "Cannot be used for a new entity with an id value like [ null ]"
+    )
 }

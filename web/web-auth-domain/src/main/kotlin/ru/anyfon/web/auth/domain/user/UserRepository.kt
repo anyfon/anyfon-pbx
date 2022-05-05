@@ -6,8 +6,11 @@ import ru.anyfon.pbx.common.domain.type.PhoneNumber
 interface UserRepository {
     suspend fun add(user: User)
 
+    suspend fun findById(id: User.ID) : User?
     suspend fun findByEmail(email: Email) : User?
 
     suspend fun findByPhone(number: PhoneNumber.External) : User?
+
+    suspend fun findAll(limit: Int = 50, offset: Long = 0) : List<User>
 
 }

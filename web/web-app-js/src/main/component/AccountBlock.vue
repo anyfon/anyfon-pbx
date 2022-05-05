@@ -8,20 +8,23 @@
                     @click="showBlock = !showBlock"/>
             <q-icon name="o_search" size="md"/>
             <q-icon name="o_notifications" size="md"/>
-            <q-avatar color="red" size="md" text-color="white">ИХ</q-avatar>
+            <q-avatar color="red" size="md" text-color="white">{{ avatarLabel }}</q-avatar>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from 'vue'
+import { computed, defineComponent, ref, watch } from 'vue'
 import { useQuasar } from 'quasar'
+import { useStore } from 'vuex'
+import { AppGetter } from '@main/store/app/getters'
 
 const ACCOUNT_SHOW_BLOCK_KEY = 'app.accountBlock.show'
 
 export default defineComponent( {
     name: 'AccountBlock',
     setup( props ) {
+        const $store = useStore()
         const $q = useQuasar()
 
         let showBlockVal = $q.localStorage.getItem( ACCOUNT_SHOW_BLOCK_KEY )
@@ -35,8 +38,17 @@ export default defineComponent( {
 
         watch( showBlock, val => $q.localStorage.set( ACCOUNT_SHOW_BLOCK_KEY, val ) )
 
+
+        const avatarLabel = computed( () => {
+            const firstName = $store.getters[ AppGetter.AUTHORIZED_USER ].firstName
+            const lastName = $store.getters[ AppGetter.AUTHORIZED_USER ].lastName
+
+            return firstName[ 0 ].toUpperCase() + lastName[ 0 ].toUpperCase()
+        } )
+
         return {
-            showBlock
+            showBlock,
+            avatarLabel
         }
     }
 } )

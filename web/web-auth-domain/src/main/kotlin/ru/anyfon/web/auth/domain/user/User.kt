@@ -18,4 +18,8 @@ class User(
     val enabled: Boolean
 ) : DomainEntity {
     class ID(uuid: String) : EntityID.AsUuidString(uuid)
+
+    fun hidePassword() : User = User(
+        id, firstName, middleName, lastName, role, email, phoneNumber, "", enabled
+    )
 }

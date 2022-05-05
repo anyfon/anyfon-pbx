@@ -1,5 +1,9 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
 
+import store from '@main/store'
+
+import { AppGetter } from '@main/store/app/getters'
+
 const AdministratePage = () => import('@page/administrate/AdministratePage.vue')
 
 const UserListPage = () => import('@page/administrate/UserListPage.vue')
@@ -7,12 +11,9 @@ const UserListPage = () => import('@page/administrate/UserListPage.vue')
 const TenantListPage = () => import('@page/administrate/TenantListPage.vue')
 
 
-
 const PbxPage = () => import( '@page/pbx/PbxPage.vue' )
 
 const CallRecordPage = () => import('@page/pbx/CallRecordPage.vue')
-
-
 
 
 const MainLayout = () => import( '@layout/MainLayout.vue' )
@@ -43,6 +44,12 @@ const routes: RouteRecordRaw[] = [
                 name: 'administrate',
                 path: 'administrate',
                 component: AdministratePage,
+                beforeEnter: ( to, from, next ) => {
+                    if ( !store.getters[ AppGetter.USER_IS_ROOT ] ) {
+                        next( { name: 'main' } )
+                    }
+                    next()
+                },
                 children: [
                     {
                         name: 'user-list',

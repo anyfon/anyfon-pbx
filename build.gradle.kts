@@ -20,6 +20,8 @@ allprojects {
 
     val kotlinSrc = File("$projectDir${File.separator}src${File.separator}main${File.separator}kotlin")
 
+    if (name.contains("-js")) return@allprojects
+
     if (
         name.startsWith("web-") ||
         name.endsWith("-spring") ||
@@ -71,8 +73,7 @@ allprojects {
     }
 
     if (
-        !(name == "common-web" || name.contains("js"))
-        && name.contains("-web")
+        name != "common-web" && name.contains("-web")
     ) {
         dependencies {
             add("api", project(":common:common-web"))

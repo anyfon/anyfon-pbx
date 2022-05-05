@@ -5,7 +5,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.reactive.function.server.coRouter
 import ru.anyfon.web.handler.WebAppHandler
 
-class RouterConfig {
+class AppRouterConfig {
     private val webAppHandler = WebAppHandler()
     @Bean
     fun webRoutes() = coRouter {
