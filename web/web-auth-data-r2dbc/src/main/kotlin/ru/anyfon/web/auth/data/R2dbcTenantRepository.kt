@@ -21,6 +21,10 @@ class R2dbcTenantRepository(
         TODO("Not yet implemented")
     }
 
+    override suspend fun findAll(limit: Int, offset: Int): List<Tenant> {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun addUsers(tenantId: TenantID, usersId: List<User.ID>) {
         TODO("Not yet implemented")
     }

@@ -4,21 +4,25 @@ import { App } from 'vue'
 import {
     QAvatar,
     QBtn,
+    QCheckbox,
     QIcon,
     QInput,
     QItem,
     QItemLabel,
     QItemSection,
+    QField,
     QList,
     QResizeObserver,
     QRouteTab,
     QSplitter,
     QSeparator,
+    QSelect,
 
     QTab,
     QTabs,
     QTable,
     QToggle,
+
 
     LocalStorage,
     Ripple
@@ -27,20 +31,24 @@ import {
 const components = {
     QAvatar,
     QBtn,
+    QCheckbox,
     QIcon,
     QInput,
     QItem,
     QItemLabel,
     QItemSection,
+    QField,
     QList,
     QResizeObserver,
     QRouteTab,
+
     QSplitter,
     QSeparator,
+    QSelect,
     QTab,
     QTabs,
     QTable,
-    QToggle
+    QToggle,
 }
 
 const plugins = {

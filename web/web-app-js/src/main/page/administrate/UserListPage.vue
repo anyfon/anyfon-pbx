@@ -1,6 +1,6 @@
 <template>
     <div class="full-height row justify-center q-pa-md">
-        <div class="col-6 content-inner q-pa-md">
+        <div class="col-xl-6 col-10 content-inner q-pa-md">
             <div class="row q-pb-md">
                 <div class="col"></div>
                 <div class="col-auto">
@@ -8,64 +8,67 @@
                 </div>
             </div>
             <q-list separator>
-                <q-separator />
-                <q-item v-ripple clickable>
+                <q-separator/>
+                <q-item v-for="user in users" v-ripple clickable :key="user.id">
                     <q-item-section avatar>
-                        <q-avatar color="red" text-color="white">AK</q-avatar>
+                        <q-avatar color="red" text-color="white">{{ user.avatarLabel }}</q-avatar>
                     </q-item-section>
                     <q-item-section>
                         <q-item-label>
-                            Artem Kh
+                            {{ user.firstName }} {{ user.lastName }}
                         </q-item-label>
                     </q-item-section>
                     <q-item-section>
                         <q-item-label>
-                            79961232970
+                            {{ user.phoneNumber }}
                         </q-item-label>
                     </q-item-section>
                     <q-item-section>
                         <q-item-label>
-                            ah@anyfon.ru
+                            {{ user.email }}
+                        </q-item-label>
+                    </q-item-section>
+                    <q-item-section>
+                        <q-item-label style="width: 100px">
+                            {{ user.role }}
                         </q-item-label>
                     </q-item-section>
                     <q-item-section side>
                         <q-toggle model-value="true" dense/>
                     </q-item-section>
                 </q-item>
-                <q-item v-ripple clickable>
-                    <q-item-section avatar>
-                        <q-avatar color="grey" text-color="white">IH</q-avatar>
-                    </q-item-section>
-                    <q-item-section>
-                        <q-item-label>
-                            Igor Kh
-                        </q-item-label>
-                    </q-item-section>
-                    <q-item-section>
-                        <q-item-label>
-                            79261119792
-                        </q-item-label>
-                    </q-item-section>
-                    <q-item-section>
-                        <q-item-label>
-                            ih@anyfon.ru
-                        </q-item-label>
-                    </q-item-section>
-                    <q-item-section side>
-                        <q-toggle model-value="true" dense/>
-                    </q-item-section>
-                </q-item>
-                <q-separator />
+                <q-separator/>
             </q-list>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
+import axios from 'axios'
+import { User } from '@main/api/models'
 
 export default defineComponent( {
-    name: 'UserListPage'
+    name: 'UserListPage',
+    setup() {
+        const users = ref([])
+
+        onMounted( () => {
+            axios.get( "/api/auth/user/fetch-list" ).then( resp => {
+                if ( resp.data ) {
+                     users.value = resp.data.map( ( user: User) => {
+                        return {
+                            ...user,
+                            avatarLabel: user.firstName[ 0 ].toUpperCase() + user.lastName[ 0 ].toUpperCase()
+                        }
+                    })
+                }
+            } )
+        } )
+        return {
+            users
+        }
+    }
 } )
 </script>
 

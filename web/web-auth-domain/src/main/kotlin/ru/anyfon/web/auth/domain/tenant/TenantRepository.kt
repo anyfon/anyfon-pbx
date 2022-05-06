@@ -11,6 +11,8 @@ interface TenantRepository {
 
     suspend fun findByName(name: Tenant.UniqueName) : Tenant?
 
+    suspend fun findAll(limit: Int = 50, offset: Int = 0) : List<Tenant>
+
     suspend fun addUser(tenantId: TenantID, vararg userId: User.ID) = addUsers(tenantId, userId.toList())
 
     suspend fun addUsers(tenantId: TenantID, usersId: List<User.ID>)

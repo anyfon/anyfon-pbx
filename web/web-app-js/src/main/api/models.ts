@@ -9,6 +9,13 @@ export interface User {
     enabled: Boolean
 }
 
+export interface Tenant {
+    id: String
+    uniqueName: String
+    enabled: Boolean
+    users: User[]
+}
+
 
 export enum UserRole {
     ROOT = 'ROOT',

@@ -32,6 +32,7 @@ const routes: RouteRecordRaw[] = [
                 name: 'pbx',
                 path: 'pbx',
                 component: PbxPage,
+                redirect: "/pbx/call-record",
                 children: [
                     {
                         name: 'call-record',
@@ -50,6 +51,7 @@ const routes: RouteRecordRaw[] = [
                     }
                     next()
                 },
+                redirect: "/administrate/user-list",
                 children: [
                     {
                         name: 'user-list',

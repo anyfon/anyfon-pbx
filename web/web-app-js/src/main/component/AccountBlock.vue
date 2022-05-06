@@ -40,10 +40,9 @@ export default defineComponent( {
 
 
         const avatarLabel = computed( () => {
-            const firstName = $store.getters[ AppGetter.AUTHORIZED_USER ].firstName
-            const lastName = $store.getters[ AppGetter.AUTHORIZED_USER ].lastName
+            const user = $store.getters[ AppGetter.AUTHORIZED_USER ]
 
-            return firstName[ 0 ].toUpperCase() + lastName[ 0 ].toUpperCase()
+            return user ? user.firstName[ 0 ].toUpperCase() + user.lastName[ 0 ].toUpperCase() : ""
         } )
 
         return {
