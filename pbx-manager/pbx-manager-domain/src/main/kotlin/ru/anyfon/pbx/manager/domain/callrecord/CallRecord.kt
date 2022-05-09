@@ -10,12 +10,10 @@ class CallRecord(
     val callSequence: CallSequence,
     val tenantID: TenantID,
     val allCalls: Iterable<CallDetails>,
+    val sourceIp: String
 
     ) : ValueObject {
 
     class ID(id: String) : EntityID.AsString(id)
 
-    enum class GroupBy {
-        ALL,
-    }
 }
