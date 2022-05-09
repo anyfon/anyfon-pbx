@@ -9,7 +9,7 @@ class ChannelEvent(
     val eventDateTime: LocalDateTime,
     val eventType: Type,
     val callRecordId: CallRecord.ID,
-    val detailRecordId: DetailRecord.ID,
+    val detailRecordId: CallDetails.ID,
     val cidNum: PhoneNumber.Any?,
     val cidAni: PhoneNumber.Any?,
     val cidRdnis: PhoneNumber.Any?,

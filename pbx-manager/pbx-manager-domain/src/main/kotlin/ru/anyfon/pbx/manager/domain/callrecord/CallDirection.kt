@@ -1,15 +1,12 @@
-package ru.anyfon.pbx.manager.domain.calldetails
+package ru.anyfon.pbx.manager.domain.callrecord
 
 import ru.anyfon.pbx.common.domain.Value
 
-class CallDirection(name: String) : Value.AsString(name, NAME_PATTERN) {
+class CallDirection(name: String) : Value.AsString(name, "[A-Z\\_]{5,15}") {
     companion object {
-        const val NAME_PATTERN = "[A-Z\\_]{5,20}"
-
+        val ANY = CallDirection("ANY")
         val INBOUND = CallDirection("INBOUND")
-
         val OUTBOUND = CallDirection("OUTBOUND")
-
         val INTERNAL = CallDirection("INTERNAL")
     }
 }

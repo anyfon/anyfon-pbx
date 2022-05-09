@@ -2,7 +2,7 @@ package ru.anyfon.asterisk.api.data.cdr
 
 import org.springframework.data.relational.core.mapping.Table
 import ru.anyfon.asterisk.api.domain.cdr.CallRecord
-import ru.anyfon.asterisk.api.domain.cdr.DetailRecord
+import ru.anyfon.asterisk.api.domain.cdr.CallDetails
 import ru.anyfon.common.util.ConvertUtils
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
 import java.time.LocalDateTime
@@ -21,9 +21,9 @@ class DetailRecordEntity(
     private val disposition: String = "",
     private val sequence: Int = -1
 ) {
-    fun toDetailRecord() : DetailRecord =
-        DetailRecord(
-            DetailRecord.ID(uniqueid),
+    fun toDetailRecord() : CallDetails =
+        CallDetails(
+            CallDetails.ID(uniqueid),
             CallRecord.ID(linkedid),
             calldate,
             ConvertUtils.tryOrNull { PhoneNumber.Any(src) },
@@ -32,7 +32,7 @@ class DetailRecordEntity(
             ConvertUtils.tryOrNull { PhoneNumber.Any(cnum) },
             recordingFile?.isNotBlank() == true,
             dcontext,
-            DetailRecord.Status.valueOf(disposition.replace(" ", "_")),
+            CallDetails.Status.valueOf(disposition.replace(" ", "_")),
             sequence
         )
 }

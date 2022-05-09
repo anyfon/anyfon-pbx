@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate
 import ru.anyfon.asterisk.api.data.cdr.R2dbcChannelEventRepository
-import ru.anyfon.asterisk.api.data.cdr.R2dbcDetailRecordRepository
+import ru.anyfon.asterisk.api.data.cdr.R2DbcCallDetailsRepository
 import ru.anyfon.asterisk.api.domain.cdr.CallRecordService
 import ru.anyfon.asterisk.api.domain.cdr.CallRecordServiceImpl
 import ru.anyfon.web.serializer.NumberValueObjectSerializer
@@ -30,7 +30,7 @@ class AppConfig(
 
         @Bean
     fun callRecordService(entityTemplate: R2dbcEntityTemplate) : CallRecordService {
-        val recordRepository = R2dbcDetailRecordRepository(entityTemplate)
+        val recordRepository = R2DbcCallDetailsRepository(entityTemplate)
         val eventRepository = R2dbcChannelEventRepository(entityTemplate)
         return CallRecordServiceImpl(recordRepository, eventRepository)
     }

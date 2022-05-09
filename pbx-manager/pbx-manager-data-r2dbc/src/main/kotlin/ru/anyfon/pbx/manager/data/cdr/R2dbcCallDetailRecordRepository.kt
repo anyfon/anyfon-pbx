@@ -2,11 +2,11 @@ package ru.anyfon.pbx.manager.data.cdr
 
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
 import ru.anyfon.pbx.common.domain.type.TenantID
-import ru.anyfon.pbx.manager.domain.calldetails.CallDirection
-import ru.anyfon.pbx.manager.domain.calldetails.CallId
-import ru.anyfon.pbx.manager.domain.calldetails.CallStatus
-import ru.anyfon.pbx.manager.domain.calldetails.record.CallDetailRecord
-import ru.anyfon.pbx.manager.domain.calldetails.record.CallDetailRecordRepository
+import ru.anyfon.pbx.manager.domain.callrecord.CallDirection
+import ru.anyfon.pbx.manager.domain.callrecord.CallId
+import ru.anyfon.pbx.manager.domain.callrecord.CallStatus
+import ru.anyfon.pbx.manager.domain.callrecord.record.CallDetailRecord
+import ru.anyfon.pbx.manager.domain.callrecord.record.CallDetailRecordRepository
 import ru.anyfon.pbx.manager.domain.siptrunk.SipTrunk
 import java.time.LocalDateTime
 

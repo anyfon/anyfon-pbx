@@ -4,7 +4,7 @@ import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
 import ru.anyfon.asterisk.api.domain.cdr.CallRecord
 import ru.anyfon.asterisk.api.domain.cdr.ChannelEvent
-import ru.anyfon.asterisk.api.domain.cdr.DetailRecord
+import ru.anyfon.asterisk.api.domain.cdr.CallDetails
 import ru.anyfon.common.util.ConvertUtils
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
 import java.time.LocalDateTime
@@ -47,7 +47,7 @@ class ChannelEventEntity(
             eventDateTime ?: throw IllegalArgumentException("Field [ eventDateTime ] must not be null"),
             ChannelEvent.Type.valueOf(eventType.toString()),
             CallRecord.ID(linkedId),
-            DetailRecord.ID(uniqueId),
+            CallDetails.ID(uniqueId),
             ConvertUtils.tryOrNull { PhoneNumber.Any(cidNum) },
             ConvertUtils.tryOrNull { PhoneNumber.Any(cidAni) },
             ConvertUtils.tryOrNull { PhoneNumber.Any(cidRdnis) },

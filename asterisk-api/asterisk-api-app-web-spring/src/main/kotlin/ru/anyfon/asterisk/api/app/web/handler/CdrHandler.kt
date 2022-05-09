@@ -8,7 +8,7 @@ import org.springframework.web.reactive.function.server.bodyValueAndAwait
 import org.springframework.web.reactive.function.server.buildAndAwait
 import ru.anyfon.asterisk.api.app.web.config.RouterConfig
 import ru.anyfon.asterisk.api.domain.cdr.CallRecordService
-import ru.anyfon.asterisk.api.domain.cdr.DetailRecord
+import ru.anyfon.asterisk.api.domain.cdr.CallDetails
 import ru.anyfon.common.util.ConvertUtils
 import ru.anyfon.common.util.toNumber
 
@@ -34,7 +34,7 @@ class CdrHandler(
 
         val detailRecordId = ConvertUtils.tryOrNull {
             val id = request.pathVariable(RouterConfig.DETAIL_RECORD_ID_PARAM)
-            DetailRecord.ID(id)
+            CallDetails.ID(id)
         } ?: return ServerResponse.badRequest().bodyValue("Bad detail record ID").awaitSingle()
 
         return service.fetchRecordFile(detailRecordId)?.let {

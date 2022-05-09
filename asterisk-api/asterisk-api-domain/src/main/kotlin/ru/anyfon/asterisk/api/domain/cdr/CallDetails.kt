@@ -6,7 +6,7 @@ import ru.anyfon.pbx.common.domain.ValueObject
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
 import java.time.LocalDateTime
 
-class DetailRecord(
+class CallDetails(
     val id: ID,
     val callRecordId: CallRecord.ID,
     val callDateTime: LocalDateTime,

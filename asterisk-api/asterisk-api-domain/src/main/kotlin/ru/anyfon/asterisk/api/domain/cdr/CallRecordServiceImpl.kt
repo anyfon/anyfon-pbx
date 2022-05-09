@@ -1,7 +1,7 @@
 package ru.anyfon.asterisk.api.domain.cdr
 
 class CallRecordServiceImpl(
-    private val recordRepository: DetailRecordRepository,
+    private val recordRepository: CallDetailsRepository,
     private val eventRepository: ChannelEventRepository,
     private val callRecordFactory: CallRecordFactory = CallRecordFactory.Base()
 ) : CallRecordService {
@@ -15,12 +15,12 @@ class CallRecordServiceImpl(
         }
     }
 
-    private fun createDetailRecordMap(detailRecords: List<DetailRecord>): Map<CallRecord.ID, List<DetailRecord>> {
+    private fun createDetailRecordMap(detailRecords: List<CallDetails>): Map<CallRecord.ID, List<CallDetails>> {
 
-        val detailRecordMap = mutableMapOf<CallRecord.ID, MutableList<DetailRecord>>()
+        val detailRecordMap = mutableMapOf<CallRecord.ID, MutableList<CallDetails>>()
 
         detailRecords.forEach { record ->
-            val currentList = detailRecordMap[record.callRecordId] ?: mutableListOf<DetailRecord>().let {
+            val currentList = detailRecordMap[record.callRecordId] ?: mutableListOf<CallDetails>().let {
                 detailRecordMap[record.callRecordId] = it
                 it
             }
@@ -44,11 +44,11 @@ class CallRecordServiceImpl(
         return eventMap
     }
 
-    override suspend fun fetchRecordFile(id: DetailRecord.ID): ByteArray? {
+    override suspend fun fetchRecordFile(id: CallDetails.ID): ByteArray? {
         TODO("Not yet implemented")
     }
 
-    override suspend fun removeRecordFile(id: DetailRecord.ID) {
+    override suspend fun removeRecordFile(id: CallDetails.ID) {
         TODO("Not yet implemented")
     }
 

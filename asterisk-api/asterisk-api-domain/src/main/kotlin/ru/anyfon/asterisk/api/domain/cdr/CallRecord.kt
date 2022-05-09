@@ -6,9 +6,9 @@ import ru.anyfon.pbx.common.domain.EntityID
 
 class CallRecord(
     val id: ID,
-    val details: List<DetailRecord>,
+    val details: List<CallDetails>,
     val events: List<ChannelEvent>,
     val sequence: Int
 ) : DomainEntity {
-    class ID(id: String) : EntityID.AsString(id, DetailRecord.ID.ID_PATTERN)
+    class ID(id: String) : EntityID.AsString(id, CallDetails.ID.ID_PATTERN)
 }
