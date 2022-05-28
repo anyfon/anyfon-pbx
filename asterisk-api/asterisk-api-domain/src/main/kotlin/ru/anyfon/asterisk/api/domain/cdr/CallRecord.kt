@@ -10,5 +10,11 @@ class CallRecord(
     val events: List<ChannelEvent>,
     val sequence: Int
 ) : DomainEntity {
-    class ID(id: String) : EntityID.AsString(id, CallDetails.ID.ID_PATTERN)
+    class ID(id: String) : EntityID.AsString(id, CallDetails.ID.ID_PATTERN) {
+        companion object {
+            val EMPTY = ID(CallDetails.ID.EMPTY.toString())
+        }
+        override fun isEmpty(): Boolean = this == EMPTY
+
+    }
 }

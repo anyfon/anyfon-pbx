@@ -49,14 +49,46 @@ interface Value<Value : Any> : java.io.Serializable, ValueObject {
         )
     }
 
-    abstract class AsPositiveInt(value: Int, includeZero: Boolean = false) : AsInt(composeValue(value, includeZero)) {
+
+    abstract class AsPositiveInt(value: Number, includeZero: Boolean = false) : AsInt(composeValue(value, includeZero)) {
 
         private companion object {
-            fun composeValue(value: Int, includeZero: Boolean): Int {
-                if (includeZero && value >= 0) {
-                    return value
-                } else if (!includeZero && value > 0) {
-                    return value
+            fun composeValue(value: Number, includeZero: Boolean): Int {
+                val intValue = value.toInt()
+
+                if (intValue == -1) return intValue
+
+                if (includeZero && intValue >= 0) {
+                    return intValue
+                } else if (!includeZero && intValue > 0) {
+                    return intValue
+                }
+
+                throw IllegalArgumentException(
+                    "Value must be positive or -1 (empty value)".let {
+                        if (includeZero) {
+                            return@let it.plus(" include 0")
+                        }
+                        return@let it
+                    }
+                )
+            }
+        }
+    }
+
+    class PositiveInt(value: Number, includeZero: Boolean = false) : AsPositiveInt(value, includeZero)
+
+    class PositiveNonZeroInt(value: Number) : AsPositiveInt(value, false)
+
+    abstract class AsPositiveLong(value: Number, includeZero: Boolean = false) : AsLong(composeValue(value, includeZero)) {
+
+        private companion object {
+            fun composeValue(value: Number, includeZero: Boolean): Long {
+                val longValue = value.toLong()
+                if (includeZero && longValue >= 0) {
+                    return longValue
+                } else if (!includeZero && longValue > 0) {
+                    return longValue
                 }
                 throw IllegalArgumentException(
                     "Value must be positive".let {

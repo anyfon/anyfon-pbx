@@ -6,8 +6,8 @@ class CallRecordServiceImpl(
     private val callRecordFactory: CallRecordFactory = CallRecordFactory.Base()
 ) : CallRecordService {
 
-    override suspend fun fetchLastEndedRecords(sequenceStart: Int): List<CallRecord> {
-        val detailRecordMap = createDetailRecordMap(recordRepository.findAll(sequenceStart))
+    override suspend fun fetchLastEndedRecords(lastLinkedId: String, limit: Int): List<CallRecord> {
+        val detailRecordMap = createDetailRecordMap(recordRepository.findAll(lastLinkedId, limit))
         val eventMap = createEventMap(eventRepository.findByCallRecordId(detailRecordMap.keys))
 
         return detailRecordMap.keys.mapNotNull {

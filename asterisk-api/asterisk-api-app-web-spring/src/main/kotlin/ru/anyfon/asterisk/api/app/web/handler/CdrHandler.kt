@@ -16,13 +16,27 @@ class CdrHandler(
     private val service: CallRecordService
 ) {
 
+    companion object {
+        const val LAST_LINKEDID_PARAM = "lastLinkedId"
+
+        const val LIMIT_PARAM = "limit"
+
+        const val FETCH_LAST_CDR_PATH = "/api/cdr/fetch-last"
+
+        const val DETAIL_RECORD_ID_PARAM = "detailsRecordId"
+
+        const val FETCH_RECORD_FILE_CDR_PATH = "/api/cdr/fetch-record-file/{$DETAIL_RECORD_ID_PARAM}"
+    }
+
     suspend fun handleList(request: ServerRequest): ServerResponse {
 
-        val sequenceStart = ConvertUtils.tryOrNull {
-            request.pathVariable(RouterConfig.SEQUENCE_START_PARAM)
-        }?.toNumber()?.toInt() ?: Int.MAX_VALUE
+        val lastLinkedId = request.queryParam(LAST_LINKEDID_PARAM).orElse("0")
 
-        val cdrList = service.fetchLastEndedRecords(sequenceStart)
+        val limit = request.queryParam(LIMIT_PARAM).map {
+            it.toNumber()?.toInt()
+        }.orElse(null) ?: 100
+
+        val cdrList = service.fetchLastEndedRecords(lastLinkedId, limit)
 
         return ServerResponse
             .status(200)
@@ -33,7 +47,7 @@ class CdrHandler(
     suspend fun handleFile(request: ServerRequest): ServerResponse {
 
         val detailRecordId = ConvertUtils.tryOrNull {
-            val id = request.pathVariable(RouterConfig.DETAIL_RECORD_ID_PARAM)
+            val id = request.pathVariable(DETAIL_RECORD_ID_PARAM)
             CallDetails.ID(id)
         } ?: return ServerResponse.badRequest().bodyValue("Bad detail record ID").awaitSingle()
 

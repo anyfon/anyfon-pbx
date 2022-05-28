@@ -3,3 +3,16 @@ spring:
     url: r2dbc:postgresql://10.0.103.100:5432/pbx_manager?schema=public
     username: admin
     password: ASqw123
+
+anyfon:
+  asterisk:
+    mysql:
+      host: ${env.ASTERISK_DB_HOST}
+      port: ${env.ASTERISK_DB_PORT}
+      username: ${env.ASTERISK_DB_USER}
+      password: ${env.ASTERISK_DB_PASS}
+      dbname: ${env.ASTERISK_DB_NAME}
+
+  mail:
+    username: ${env.MAIL_USER}
+    password: ${env.MAIL_PASS}

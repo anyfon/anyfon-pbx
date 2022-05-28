@@ -4,17 +4,17 @@ import store from '@main/store'
 
 import { AppGetter } from '@main/store/app/getters'
 
-const AdministratePage = () => import('@page/administrate/AdministratePage.vue')
+const AdministratePage = () => import( '@page/administrate/AdministratePage.vue' )
 
-const UserListPage = () => import('@page/administrate/UserListPage.vue')
+const UserListPage = () => import( '@page/administrate/UserListPage.vue' )
 
-const TenantListPage = () => import('@page/administrate/TenantListPage.vue')
+const TenantListPage = () => import( '@page/administrate/TenantListPage.vue' )
 
+const SipSubscriberListPage = () => import( '@page/administrate/SipSubscriberListPage.vue' )
 
 const PbxPage = () => import( '@page/pbx/PbxPage.vue' )
 
-const CallRecordPage = () => import('@page/pbx/CallRecordPage.vue')
-
+const CallRecordPage = () => import( '@page/pbx/CallRecordPage.vue' )
 
 const MainLayout = () => import( '@layout/MainLayout.vue' )
 // const BlankLayout = () => import( '@layout/BlankLayout.vue' )
@@ -32,7 +32,7 @@ const routes: RouteRecordRaw[] = [
                 name: 'pbx',
                 path: 'pbx',
                 component: PbxPage,
-                redirect: "/pbx/call-record",
+                redirect: '/pbx/call-record',
                 children: [
                     {
                         name: 'call-record',
@@ -51,7 +51,7 @@ const routes: RouteRecordRaw[] = [
                     }
                     next()
                 },
-                redirect: "/administrate/user-list",
+                redirect: '/administrate/user-list',
                 children: [
                     {
                         name: 'user-list',
@@ -62,6 +62,11 @@ const routes: RouteRecordRaw[] = [
                         name: 'tenant-list',
                         path: 'tenant-list',
                         component: TenantListPage
+                    },
+                    {
+                        name: 'sip-subscriber-list',
+                        path: 'sip-subscriber-list',
+                        component: SipSubscriberListPage
                     }
                 ]
             }

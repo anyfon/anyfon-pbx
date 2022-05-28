@@ -9,26 +9,19 @@ interface UserHandler : ResourceHandler {
 
     companion object {
 
-        private const val AUTH_USER_PATH = ApiRouteConfig.BASE_API_PATH.plus("/auth/user")
+        const val BASE_PATH = ApiRouteConfig.BASE_API_PATH.plus("/auth/user")
 
-        const val USER_ID_PARAM = "userId"
+        const val ID_PARAM = "userId"
 
-        const val FETCH_LIST_USER_PATH = AUTH_USER_PATH.plus("/fetch-list")
+        const val FETCH_LIST_PATH = BASE_PATH.plus("/fetch-list")
 
-        const val FETCH_ONE_USER_PATH = AUTH_USER_PATH.plus("/fetch-one/{$USER_ID_PARAM}")
+        const val FETCH_ONE_PATH = BASE_PATH.plus("/fetch-one/{$ID_PARAM}")
 
-        const val FETCH_SELF_USER_PATH = AUTH_USER_PATH.plus("/fetch-self")
+        const val ADD_PATH = BASE_PATH.plus("/add")
 
-        const val ADD_USER_PATH = AUTH_USER_PATH.plus("/add")
+        const val FETCH_SELF_PATH = BASE_PATH.plus("/fetch-self")
 
     }
-
-
-    suspend fun fetchList(serverRequest: ServerRequest) : ServerResponse
-
-    suspend fun fetchOne(serverRequest: ServerRequest) : ServerResponse
-
-    suspend fun add(serverRequest: ServerRequest) : ServerResponse
 
     suspend fun fetchSelf(serverRequest: ServerRequest) : ServerResponse
 

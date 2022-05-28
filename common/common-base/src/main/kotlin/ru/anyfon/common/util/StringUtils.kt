@@ -2,6 +2,10 @@ package ru.anyfon.common.util
 
 
 object StringUtils {
+
+    const val ALLOWED_HTML_SYMBOLS_PATTERN = "[А-Яа-я\\w\\s\\;\\,\\.\\-\\+\\*\\%\\$\\#\\@\\!\\[\\]\\(\\)]*"
+    const val ALL_LETTER_INT_DOG = "[А-Яа-я\\w\\s\\@]*"
+
     fun camelCaseToString(camelCase: String?, divider: String = " "): String? {
         val first = camelCase?.get(0)
         return first?.lowercase() + camelCase?.substring(1)?.flatMap {

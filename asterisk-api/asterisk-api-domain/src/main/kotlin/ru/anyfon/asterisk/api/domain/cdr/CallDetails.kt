@@ -22,7 +22,10 @@ class CallDetails(
     class ID(id: String) : EntityID.AsString(id, ID_PATTERN) {
         companion object {
             const val ID_PATTERN = "\\d{8,10}\\.\\d{1,20}"
+            val EMPTY = ID("00000000.0")
         }
+
+        override fun isEmpty(): Boolean = this == EMPTY
     }
 
     enum class Status : Value.EnumAsString {

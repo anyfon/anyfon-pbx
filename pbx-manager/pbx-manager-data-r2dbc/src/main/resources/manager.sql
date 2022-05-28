@@ -1,18 +1,31 @@
-create table cdr
+create table call_record
 (
-    id              varchar(36)           not null,
-    root_id         varchar(36)           not null,
-    call_date_time  timestamp   default now(),
-    from_number     varchar(20)           not null,
-    to_number       varchar(20)           not null,
-    answer_time     int         default null,
-    using_duration  int         default null,
-    call_duration   int         default 0 not null,
-    status          varchar(20),
-    has_record_file boolean,
-    tenant_id       varchar(36)           not null,
-    sip_trunk_id    varchar(36) default null
+    id        varchar default 36 not null
+        constraint call_record_pk
+            primary key,
+    tenant_id varchar default 36,
+    source_ip varchar default 15
 );
 
-create unique index cdr_id_uindex
-    on cdr (id);
+
+
+create unique index call_record_id_uindex
+    on call_record (call_id);
+
+
+create table call_operation
+(
+    id              varchar default 36 not null
+        constraint call_operation_pk
+            primary key,
+    call_record_id  varchar default 36,
+    parent_id       varchar default 36,
+    app_name        varchar default 36,
+    start_date_time timestamp
+);
+
+alter table call_operation
+    owner to admin;
+
+create unique index call_operation_id_uindex
+    on call_operation (id);

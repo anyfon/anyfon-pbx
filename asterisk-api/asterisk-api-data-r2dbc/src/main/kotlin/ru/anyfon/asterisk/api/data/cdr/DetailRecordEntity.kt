@@ -16,7 +16,7 @@ class DetailRecordEntity(
     private val dst: String? = null,
     private val did: String? = null,
     private val cnum: String? = null,
-    private val recordingFile: String? = null,
+    private val recordingfile: String? = null,
     private val dcontext: String = "",
     private val disposition: String = "",
     private val sequence: Int = -1
@@ -30,7 +30,7 @@ class DetailRecordEntity(
             ConvertUtils.tryOrNull { PhoneNumber.Any(dst) },
             ConvertUtils.tryOrNull { PhoneNumber.Any(did) },
             ConvertUtils.tryOrNull { PhoneNumber.Any(cnum) },
-            recordingFile?.isNotBlank() == true,
+            recordingfile?.isNotBlank() == true,
             dcontext,
             CallDetails.Status.valueOf(disposition.replace(" ", "_")),
             sequence

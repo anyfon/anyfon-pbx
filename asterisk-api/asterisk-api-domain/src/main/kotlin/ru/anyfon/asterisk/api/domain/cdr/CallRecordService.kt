@@ -11,7 +11,7 @@ interface CallRecordService {
                 File.separator + "monitor"
     }
 
-    suspend fun fetchLastEndedRecords(sequenceStart: Int): List<CallRecord>
+    suspend fun fetchLastEndedRecords(lastLinkedId: String, limit: Int = 100): List<CallRecord>
 
     suspend fun fetchRecordFile(id: CallDetails.ID): ByteArray?
 

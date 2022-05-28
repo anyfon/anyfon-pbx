@@ -11,10 +11,10 @@ import ru.anyfon.asterisk.api.domain.cdr.CallDetailsRepository
 class R2DbcCallDetailsRepository(
     private val entityTemplate: R2dbcEntityTemplate
 ) :CallDetailsRepository {
-    override suspend fun findAll(sequenceStart: Int): List<CallDetails> {
+    override suspend fun findAll(lastLinkedId: String, limit: Int): List<CallDetails> {
         val query = Query.query(
-            Criteria.where("sequence").greaterThan(sequenceStart)
-        ).sort(Sort.by("sequence"))
+            Criteria.where("linkedid").greaterThan(lastLinkedId)
+        ).sort(Sort.by("uniqueid")).limit(limit)
 
         return entityTemplate
             .select(query, DetailRecordEntity::class.java)

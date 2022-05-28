@@ -8,10 +8,7 @@ import org.springframework.web.reactive.function.server.bodyValueAndAwait
 import org.springframework.web.reactive.function.server.buildAndAwait
 import ru.anyfon.common.util.ConvertUtils
 import ru.anyfon.pbx.common.domain.type.TenantID
-import ru.anyfon.pbx.resource.retrieveAuthorizedUser
-import ru.anyfon.pbx.resource.user.UserHandler
 import ru.anyfon.web.auth.domain.tenant.TenantRepository
-import ru.anyfon.web.auth.domain.user.User
 
 class TenantHandlerImpl(
     private val tenantRepository: TenantRepository
@@ -31,7 +28,7 @@ class TenantHandlerImpl(
         val user = retrieveAuthorizedUser(serverRequest)
             ?: return ServerResponse.badRequest().bodyValueAndAwait("Principal undefined")
 
-        val tenantId = ConvertUtils.tryOrNull { TenantID(serverRequest.pathVariable(TenantHandler.TENANT_ID_PARAM)) }
+        val tenantId = ConvertUtils.tryOrNull { TenantID(serverRequest.pathVariable(TenantHandler.ID_PARAM)) }
             ?: return ServerResponse.notFound().buildAndAwait()
 
         if (user.authorities.any { it.authority == "ROOT" || it.authority == "MANAGER" } ) {

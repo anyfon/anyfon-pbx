@@ -4,6 +4,7 @@
             <q-tabs>
                 <q-route-tab to="/administrate/user-list" label="Пользователи"></q-route-tab>
                 <q-route-tab to="/administrate/tenant-list" label="Эккаунты"></q-route-tab>
+                <q-route-tab to="/administrate/sip-subscriber-list" label="SIP пользователи"></q-route-tab>
             </q-tabs>
         </template>
         <template v-slot:content>

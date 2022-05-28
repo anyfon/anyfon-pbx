@@ -1,6 +1,7 @@
 package ru.anyfon.pbx.common.domain.type
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertThrows
+import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 internal class PhoneNumberTest {
@@ -8,50 +9,58 @@ internal class PhoneNumberTest {
     fun `Creating an internal Phone number`() {
 
         assertThrows(IllegalArgumentException::class.java) {
-            PhoneNumber.Internal("79261119792")  // External number
+            PhoneNumber.Extension("79261119792")  // External number
         }
 
         assertThrows(IllegalArgumentException::class.java) {
-            PhoneNumber.Internal("not-number")
+            PhoneNumber.Extension("not-number")
         }
 
-        val internalNumberOfInt = PhoneNumber.Internal(4216)
+        val internalNumberOfInt = PhoneNumber.Extension("000103162546")
 
-        assertTrue(internalNumberOfInt.toString() == "4216")
+        assertTrue(internalNumberOfInt.toString() == "000103162546")
 
-        assertTrue(internalNumberOfInt.value == "4216")
+        assertTrue(internalNumberOfInt.value == "000103162546")
 
 
-        val internalNumberOfString = PhoneNumber.Internal("5-(21)-63")
+        val internalNumberOfString = PhoneNumber.Extension("000-165452-205")
 
-        assertTrue(internalNumberOfString.toString() == "52163")
+        assertTrue(internalNumberOfString.toString() == "000165452205")
 
-        assertTrue(internalNumberOfString.value == "52163")
+        assertTrue(internalNumberOfString.value == "000165452205")
     }
 
     @Test
     fun `Creating an External phone number`() {
 
         assertThrows(IllegalArgumentException::class.java) {
-            PhoneNumber.External("2576")  // Internal number
+            PhoneNumber.External("00025765234")  // Internal number
         }
 
         assertThrows(IllegalArgumentException::class.java) {
             PhoneNumber.External("not-number")
         }
 
-        val externalNumberOfInt = PhoneNumber.External(79261119792)
+        val externalNumberOfInt = PhoneNumber.External(79261119792, "External number")
 
-        assertTrue(externalNumberOfInt.toString() == "79261119792")
+        assertTrue(externalNumberOfInt.toString() == "79261119792 <External number>")
 
-        assertTrue(externalNumberOfInt.value == "79261119792")
+        assertTrue(externalNumberOfInt.name.toString() == "External number")
+
+        assertTrue(externalNumberOfInt.number == "79261119792")
+
+        assertTrue(externalNumberOfInt.value == "79261119792 <External number>")
 
 
-        val externalNumberOfString = PhoneNumber.External("+7 (926) 111-97-92")
+        val externalNumberOfString = PhoneNumber.External("+7 (926) 111-97-92", "External number with trash")
 
-        assertTrue(externalNumberOfString.toString() == "79261119792")
+        assertTrue(externalNumberOfString.toString() == "79261119792 <External number with trash>")
 
-        assertTrue(externalNumberOfString.value == "79261119792")
+        assertTrue(externalNumberOfString.name.toString() == "External number with trash")
+
+        assertTrue(externalNumberOfString.number == "79261119792")
+        
+        assertTrue(externalNumberOfString.value == "79261119792 <External number with trash>")
     }
 
     @Test
@@ -71,14 +80,14 @@ internal class PhoneNumberTest {
 
         val anyNumberOfInt = PhoneNumber.Any(79261119792)
 
-        assertTrue(anyNumberOfInt.toString() == "79261119792")
+        assertTrue(anyNumberOfInt.number == "79261119792")
 
         assertTrue(anyNumberOfInt.value == "79261119792")
 
 
         val anyNumberOfString = PhoneNumber.Any("+7 (926) 111-97-92")
 
-        assertTrue(anyNumberOfString.toString() == "79261119792")
+        assertTrue(anyNumberOfString.number == "79261119792")
 
         assertTrue(anyNumberOfString.value == "79261119792")
 
@@ -98,21 +107,6 @@ internal class PhoneNumberTest {
 
         assertTrue(unavailableAnyPhoneNumber.value == "Unavailable")
 
-    }
-
-    @Test
-    fun `Creating anonymous or Unavailable Internal phone numbers`() {
-        val anonymousInternalPhoneNumber = PhoneNumber.Internal("anonymous")
-
-        assertTrue(anonymousInternalPhoneNumber.toString() == "anonymous")
-
-        assertTrue(anonymousInternalPhoneNumber.value == "anonymous")
-
-        val unavailableInternalPhoneNumber = PhoneNumber.Internal("Unavailable")
-
-        assertTrue(unavailableInternalPhoneNumber.toString() == "Unavailable")
-
-        assertTrue(unavailableInternalPhoneNumber.value == "Unavailable")
     }
 
     @Test

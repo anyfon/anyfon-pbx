@@ -7,6 +7,8 @@ spring:
     url: r2dbc:mysql://10.0.103.35:3306/admin_asterisk
     username: ${env.DEV_DB_USER}
     password: ${env.DEV_DB_PASS}
+server:
+  port: 8090
 
 ---
 spring:
@@ -18,3 +20,10 @@ spring:
     url: r2dbc:mysql://localhost:3306/asteriskcdrdb
     username: ${env.DB_USER}
     password: ${env.DB_PASS}
+
+---
+
+anyfon:
+  mail:
+    username: ${env.MAIL_USER}
+    password: ${env.MAIL_PASS}
