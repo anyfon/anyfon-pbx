@@ -7,6 +7,6 @@ build
 **/build
 **/node_modules
 **/.env
-.last_linked_id
+.last_event_id
 tmp
 **/out

@@ -11,7 +11,7 @@ alter table tenant
     owner to admin;
 
 create unique index tenant_id_uindex
-    on tenant (id);
+    on tenant (uuid);
 
 create unique index tenant_name_uindex
     on tenant ("uniqueName");
@@ -41,7 +41,7 @@ create unique index usr_email_uindex
     on usr (email);
 
 create unique index usr_id_uindex
-    on usr (id);
+    on usr (uuid);
 
 create unique index usr_phone_number_uindex
     on usr (phone_number);
@@ -56,4 +56,4 @@ create table tenant_user_rel
 );
 
 create index tenant_user_rel_tenant_id_user_id_index
-    on tenant_user_rel (tenant_id, user_id);
+    on tenant_user_rel (tenant_uuid, user_uuid);

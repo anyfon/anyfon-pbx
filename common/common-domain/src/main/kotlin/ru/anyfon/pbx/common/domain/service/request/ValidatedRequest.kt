@@ -1,4 +1,7 @@
-package ru.anyfon.pbx.common.domain.service
+package ru.anyfon.pbx.common.domain.service.request
+
+import ru.anyfon.pbx.common.domain.service.message.MessageParams
+import ru.anyfon.pbx.common.domain.service.message.MessageSource
 
 interface ValidatedRequest {
 

@@ -1,21 +1,20 @@
 package ru.anyfon.pbx.resource.user
 
 import org.springframework.security.core.GrantedAuthority
-import org.springframework.security.core.userdetails.UserDetails
-import ru.anyfon.web.auth.domain.user.User
+import ru.anyfon.web.auth.domain.user.service.UserData
 import java.security.Principal
+import org.springframework.security.core.userdetails.UserDetails as SpringUserDetails
 
 class AuthorizedUser(
-    private val user: User
-) : UserDetails, Principal {
-
-    val id = user.id
+    private val user: UserData,
+    private val passwordHash: String
+) : Principal, SpringUserDetails {
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
         mutableListOf(object : GrantedAuthority {
             override fun getAuthority(): String = user.role.toString()
         })
-    override fun getPassword(): String = user.password
+    override fun getPassword(): String = passwordHash
 
     override fun getUsername(): String = user.phoneNumber.toString()
 

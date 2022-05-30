@@ -10,10 +10,7 @@ interface CallRecordFactory {
             return CallRecord(
                 rootRecord.callRecordId,
                 detailRecords,
-                events,
-                detailRecords.maxOf {
-                    it.sequence
-                }
+                events
             )
         }
 
@@ -21,6 +18,8 @@ interface CallRecordFactory {
             events.any { it.eventType == ChannelEvent.Type.LINKEDID_END }
 
         private fun extractRootRecord(detailRecords: List<CallDetails>) : CallDetails? =
-            detailRecords.firstOrNull { it.callRecordId.equals(it.id) }
+            detailRecords.firstOrNull {
+                it.callRecordId.toString() == it.id.toString()
+            }
     }
 }

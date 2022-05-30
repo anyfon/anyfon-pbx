@@ -4,7 +4,7 @@ import ru.anyfon.pbx.common.domain.DomainEntity
 import ru.anyfon.pbx.common.domain.type.ExecutionStatus
 import ru.anyfon.pbx.common.domain.type.IP
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
-import ru.anyfon.pbx.common.domain.type.TenantID
+import ru.anyfon.pbx.common.domain.type.Tenant
 import ru.anyfon.pbx.manager.domain.callmanager.CallDirection
 import ru.anyfon.pbx.manager.domain.callmanager.CallID
 import ru.anyfon.pbx.manager.domain.callmanager.DialStatus
@@ -16,7 +16,7 @@ class CallRecord(
     val timestamp: LocalDateTime,
     val fromNumber: PhoneNumber.Any,
     val toNumber: PhoneNumber.Any,
-    val tenantId: TenantID,
+    val tenantId: Tenant.ID,
     val subscriberUuid: Subscriber.Uuid,
     val sourceIpV4: IP.V4?,
     val sourceIpV6: IP.V6?,

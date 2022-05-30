@@ -2,15 +2,18 @@ package ru.anyfon.asterisk.api.data.cdr
 
 import org.springframework.data.relational.core.mapping.Column
 import org.springframework.data.relational.core.mapping.Table
+import ru.anyfon.asterisk.api.domain.cdr.CallDetails
 import ru.anyfon.asterisk.api.domain.cdr.CallRecord
 import ru.anyfon.asterisk.api.domain.cdr.ChannelEvent
-import ru.anyfon.asterisk.api.domain.cdr.CallDetails
 import ru.anyfon.common.util.ConvertUtils
+import ru.anyfon.pbx.common.domain.Value
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
 import java.time.LocalDateTime
 
 @Table("cel")
 class ChannelEventEntity(
+    private val id: Int? = null,
+
     @Column("eventtime")
     private val eventDateTime: LocalDateTime? = null,
 
@@ -37,7 +40,7 @@ class ChannelEventEntity(
     private val appName: String? = null,
 
     @Column("linkedid")
-    private val linkedId: String = "",
+    val linkedId: String = "",
 
     @Column("uniqueid")
     private val uniqueId: String = ""
@@ -54,7 +57,8 @@ class ChannelEventEntity(
             ConvertUtils.tryOrNull { PhoneNumber.Any(cidDnid) },
             ConvertUtils.tryOrNull { PhoneNumber.Any(exten) },
             context.toString(),
-            appName.toString()
+            appName.toString(),
+            Value.PositiveZeroInt(id)
         )
 
 }

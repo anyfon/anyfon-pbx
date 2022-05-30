@@ -1,9 +1,11 @@
-package ru.anyfon.pbx.common.domain.service
+package ru.anyfon.pbx.common.domain.service.request
+
+import ru.anyfon.pbx.common.domain.service.message.MessageParams
 
 class IterableFieldHandler<Raw, Value>(
     fieldId: FieldID,
     iterableRaw: Iterable<Raw>,
-    errorMessages: MutableMap<FieldID, MessageParams>,
+    private val errorMessages: MutableMap<FieldID, MessageParams>,
     itemMapper: FieldMapper<Raw, Value>
 ) {
 
@@ -15,6 +17,8 @@ class IterableFieldHandler<Raw, Value>(
     ) : this(FieldID(fieldId), iterableRaw, errorMessages, itemMapper)
 
     val value: List<Value>
+
+    val hasErrors get() = errorMessages.isNotEmpty()
 
     init {
         value = iterableRaw.let {

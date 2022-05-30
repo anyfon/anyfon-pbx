@@ -62,9 +62,20 @@ interface PhoneNumber<Type : PhoneNumber.Type> : Value<String> {
         name: String? = null
     ) : Abstract<Type.Extension>(number, name, Type.Extension) {
 
+        constructor(
+            tenantPrefix: Internal,
+            internalNumber: Internal,
+            name: String? = null
+        ) : this(composeNumber(tenantPrefix, internalNumber), name)
+
+        private companion object {
+            fun composeNumber(tenantPrefix: Internal, internalNumber: Internal) : String =
+                EXTENSION_PREFIX.plus(tenantPrefix.number).plus(internalNumber.number)
+        }
+
         val prefix: String = EXTENSION_PREFIX
 
-        val tenantPrefix: String = this.number.substring(3, 9)
+        val tenantPrefix: Internal = Internal(this.number.substring(3, 9))
 
         val internalNumber: Internal = Internal(this.number.substring(9), name)
 

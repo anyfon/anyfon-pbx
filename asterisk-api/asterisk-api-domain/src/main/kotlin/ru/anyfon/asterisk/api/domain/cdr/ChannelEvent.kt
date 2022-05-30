@@ -16,7 +16,8 @@ class ChannelEvent(
     val cidDnid: PhoneNumber.Any?,
     val exten: PhoneNumber.Any?,
     val context: String,
-    val appName: String
+    val appName: String,
+    val id: Value.PositiveZeroInt
 ) : ValueObject {
 
     enum class Type : Value.EnumAsString {

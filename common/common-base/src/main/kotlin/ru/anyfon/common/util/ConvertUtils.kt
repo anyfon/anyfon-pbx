@@ -7,7 +7,7 @@ object ConvertUtils {
     fun toNumber(source: Any?): Number? {
         return when (source) {
             is Number -> source
-            is String -> source.toBigDecimalOrNull()
+            is String -> source.replace("\\D".toRegex(), "").toBigDecimalOrNull()
             else -> null
         }
     }

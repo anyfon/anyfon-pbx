@@ -5,8 +5,14 @@ import ru.anyfon.pbx.common.domain.EntityID
 import ru.anyfon.pbx.common.domain.Value
 
 interface Tenant : DomainEntity {
+
     val id: ID
+
     val uniqueName: UniqueName
+
+    val prefixNumber: PhoneNumber.Internal
+
+    val enabled: Boolean
 
     class ID (uuid: String?) : EntityID.AsUuidString(uuid) {
         companion object {
@@ -18,7 +24,7 @@ interface Tenant : DomainEntity {
 
     class UniqueName(name: String) : Value.AsString(name, NAME_PATTERN) {
         companion object {
-            const val NAME_PATTERN = "[a-z\\_\\-]{5,15}"
+            const val NAME_PATTERN = "[a-z\\_\\-]{5,20}"
         }
     }
 }

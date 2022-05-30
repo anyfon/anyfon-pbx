@@ -1,4 +1,4 @@
-package ru.anyfon.pbx.common.domain.service
+package ru.anyfon.pbx.common.domain.service.message
 
 class MessageParams(
     val defaultErrorMessage: String,

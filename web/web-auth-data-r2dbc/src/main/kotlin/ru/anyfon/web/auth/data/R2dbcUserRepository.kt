@@ -7,13 +7,13 @@ import org.springframework.data.relational.core.query.Criteria
 import org.springframework.data.relational.core.query.Query
 import ru.anyfon.pbx.common.domain.type.Email
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
-import ru.anyfon.web.auth.domain.user.User
+import ru.anyfon.web.auth.domain.user.service.UserData
 import ru.anyfon.web.auth.domain.user.UserRepository
 
 class R2dbcUserRepository(
     private val entityTemplate: R2dbcEntityTemplate
 ) : UserRepository {
-    override suspend fun add(user: User) {
+    override suspend fun add(user: UserData) {
         val entity = UserEntity(
             null,
             user.firstName.toString(),
@@ -28,7 +28,7 @@ class R2dbcUserRepository(
         entityTemplate.insert(entity).awaitSingle()
     }
 
-    override suspend fun findById(id: User.ID): User? {
+    override suspend fun findById(id: UserData.ID): UserData? {
         val query = Query.query(
             Criteria.where("id").`is`(id.toString())
         )
@@ -40,7 +40,7 @@ class R2dbcUserRepository(
             }.awaitSingle()
     }
 
-    override suspend fun findByEmail(email: Email): User? {
+    override suspend fun findByEmail(email: Email): UserData? {
         val query = Query.query(
             Criteria.where("email").`is`(email.toString())
         )
@@ -52,7 +52,7 @@ class R2dbcUserRepository(
             }.awaitSingle()
     }
 
-    override suspend fun findByPhone(number: PhoneNumber.External): User? {
+    override suspend fun findByPhone(number: PhoneNumber.External): UserData? {
         val query = Query.query(
             Criteria.where("phone_number").`is`(number.toString())
         )
@@ -64,7 +64,7 @@ class R2dbcUserRepository(
             }.awaitSingle()
     }
 
-    override suspend fun findAll(limit: Int, offset: Long): List<User> {
+    override suspend fun findAll(limit: Int, offset: Long): List<UserData> {
 
         val query = Query.empty().sort(Sort.by("lastName")).limit(limit).offset(offset)
 

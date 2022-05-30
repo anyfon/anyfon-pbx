@@ -15,6 +15,7 @@ class CallDetails(
     val did: PhoneNumber.Any? = null,
     val cnum: PhoneNumber.Any? = null,
     val hasRecord: Boolean,
+    val recordingFileName: String? = null,
     val dcontext: String,
     val status: Status,
     val sequence: Int

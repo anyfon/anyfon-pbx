@@ -3,8 +3,8 @@ package ru.anyfon.web.auth.data
 import org.springframework.data.annotation.Id
 import org.springframework.data.relational.core.mapping.Table
 import ru.anyfon.pbx.common.domain.type.TenantID
-import ru.anyfon.web.auth.domain.tenant.TenantDetails
-import ru.anyfon.web.auth.domain.user.User
+import ru.anyfon.web.auth.domain.tenant.TenantData
+import ru.anyfon.web.auth.domain.user.service.UserData
 
 @Table("tenant")
 class TenantEntity(
@@ -14,10 +14,10 @@ class TenantEntity(
     private val enabled: Boolean = false
 ) {
 
-    fun toTenant(users: Iterable<User>): TenantDetails =
-        TenantDetails(
+    fun toTenant(users: Iterable<UserData>): TenantData =
+        TenantData(
             TenantID(id),
-            TenantDetails.UniqueName(uniqueName),
+            TenantData.UniqueName(uniqueName),
             enabled,
             users
         )

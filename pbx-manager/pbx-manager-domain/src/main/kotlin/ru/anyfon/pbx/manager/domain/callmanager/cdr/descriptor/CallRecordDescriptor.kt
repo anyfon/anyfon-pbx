@@ -3,7 +3,7 @@ package ru.anyfon.pbx.manager.domain.callmanager.cdr.descriptor
 import ru.anyfon.pbx.common.domain.type.ExecutionStatus
 import ru.anyfon.pbx.common.domain.type.IP
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
-import ru.anyfon.pbx.common.domain.type.TenantID
+import ru.anyfon.pbx.common.domain.type.Tenant
 import ru.anyfon.pbx.manager.domain.callmanager.AppName
 import ru.anyfon.pbx.manager.domain.callmanager.CommandName
 import ru.anyfon.pbx.manager.domain.subscriber.Subscriber
@@ -12,7 +12,7 @@ import java.time.LocalDateTime
 interface CallRecordDescriptor {
 
     fun create(
-        tenantId: TenantID,
+        tenantId: Tenant.ID,
         subscriberUuid: Subscriber.Uuid,
         fromNumber: PhoneNumber.Any,
         toNumber: PhoneNumber.Any,

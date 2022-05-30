@@ -1,5 +1,6 @@
-package ru.anyfon.pbx.common.domain.service
+package ru.anyfon.pbx.common.domain.service.request
 
+import ru.anyfon.pbx.common.domain.service.message.MessageParams
 import java.util.function.Supplier
 
 fun interface FieldMapper<Raw, Value> {

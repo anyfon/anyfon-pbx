@@ -2,7 +2,9 @@ package ru.anyfon.pbx.manager.domain.subscriber.user
 
 import ru.anyfon.common.util.ConvertUtils
 import ru.anyfon.common.util.StringUtils
-import ru.anyfon.pbx.common.domain.service.*
+import ru.anyfon.pbx.common.domain.service.message.MessageParams
+import ru.anyfon.pbx.common.domain.service.message.MessageSource
+import ru.anyfon.pbx.common.domain.service.request.*
 import ru.anyfon.pbx.common.domain.type.Email
 import ru.anyfon.pbx.common.domain.type.FullName
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
@@ -19,9 +21,12 @@ interface SipUserRequest : Request {
         extensions: List<String> = emptyList(),
         usernames: List<String> = emptyList(),
         nameEmailExtensionContains: String? = null,
-        val enabled: Boolean? = null,
-        val registered: Boolean? = null
-    ) : SipUserRequest {
+        enabled: String? = null,
+        registered: String? = null,
+        offset: String? = null,
+        limit: String? = null,
+        groupBy: Iterable<String> = emptyList()
+    ) : SipUserRequest, Request.List(offset, limit) {
 
         val subscribersUuid = subscribersUuid.mapNotNull { ConvertUtils.tryOrNull { Subscriber.Uuid(it) } }
 
@@ -36,27 +41,37 @@ interface SipUserRequest : Request {
         val usernames = usernames.mapNotNull { ConvertUtils.tryOrNull { Subscriber.Username(it) } }
 
         val nameEmailExtensionContains = nameEmailExtensionContains
-            ?.replace(StringUtils.ALL_LETTER_INT_DOG, "")
+            ?.replace(StringUtils.ALL_LETTER_INT_DOG_PATTERN, "")
+
+        val enabled = enabled?.let { it == "true" }
+
+        val registered = registered?.let { it == "true" }
+
+        override val orderBy: Iterable<FieldID> = AllowOrderFiled(
+            FieldID("email"),
+            FieldID("extension"),
+            FieldID("username")
+        ).parse(groupBy)
 
         override fun validate(messageSource: MessageSource?): ValidatedRequest = ValidatedRequest.VALID
 
     }
 
     class Data(
-        subscriberUuid: String? = null,
         internalNumber: String? = null,
         name: String? = null,
         email: String? = null,
-        description: String? = null
+        description: String? = null,
+        subscriberUuid: String? = null
     ) : SipUserRequest {
 
         private val errorMessages: MutableMap<FieldID, MessageParams> = mutableMapOf()
 
         val subscriberUuid = ValidatedField("subscriberUuid", subscriberUuid, errorMessages) {
             FieldMapper.Result("Must be UUID") {
-                it?.let { Subscriber.Uuid(it) }  ?: Subscriber.Uuid.EMPTY
+                it?.let { Subscriber.Uuid(it) } ?: Subscriber.Uuid.EMPTY
             }
-        }.value
+        }.value!!
 
         val internalNumber = ValidatedField("internalNumber", internalNumber, errorMessages) {
             FieldMapper.Result("Must be INT from 100 to 999999") {
@@ -77,9 +92,16 @@ interface SipUserRequest : Request {
         }.value
 
         val description = description?.let {
-            it.replace(StringUtils.ALLOWED_HTML_SYMBOLS_PATTERN.toRegex(),"")
+            it.replace(StringUtils.ALLOWED_HTML_SYMBOLS_PATTERN.toRegex(), "")
         }
 
+        fun withUuid(uuid: Subscriber.Uuid) : Data = Data(
+            internalNumber?.number,
+            name?.toString(),
+            email.toString(),
+            description,
+            uuid.toString()
+        )
 
         override fun validate(messageSource: MessageSource?): ValidatedRequest =
             ValidatedRequest.compose(errorMessages, messageSource)
@@ -103,9 +125,8 @@ interface SipUserRequest : Request {
             }
         }.value!!
 
-        override fun validate(messageSource: MessageSource?): ValidatedRequest {
-            TODO("Not yet implemented")
-        }
+        override fun validate(messageSource: MessageSource?): ValidatedRequest =
+            ValidatedRequest.compose(errorMessages, messageSource)
 
     }
 }

@@ -5,26 +5,18 @@ import org.springframework.data.relational.core.mapping.Table
 import ru.anyfon.pbx.manager.domain.subscriber.Subscriber
 
 @Table("sip_subscriber")
-data class SubscriberEntity private constructor(
+class SubscriberEntity private constructor(
     @Id
-    private val id: String? = null,
-    private val username: String? = null,
+    val id: String? = null,
+    private val username: String,
     private val password: String? = null,
     private val enabled: Boolean = false
 ) {
-
-    companion object {
-        fun new(subscriber: Subscriber, passwordHash: String?) : SubscriberEntity {
-            if (!subscriber.uuid.isEmpty()) throw IllegalArgumentException(
-                "For a new entity subscriber's [ ID ] field must be EMPTY"
-            )
-            return SubscriberEntity(
-                null, subscriber.username.toString(),
-                passwordHash,
-                subscriber.enabled
-            )
-        }
-    }
+    constructor(
+        username: String,
+        enabled: Boolean = false,
+        passwordHash: String? = null
+    ) : this(null, username, passwordHash, enabled)
 
     fun toSubscriber(): Subscriber = Subscriber(
         Subscriber.Uuid(id),
@@ -32,13 +24,14 @@ data class SubscriberEntity private constructor(
         enabled
     )
 
-    fun update(subscriber: Subscriber, passwordHash: String? = null): SubscriberEntity =
-        SubscriberEntity(
-            id,
-            subscriber.username.toString(),
-            passwordHash ?: password,
-            subscriber.enabled
-        )
-
-    fun getId() : Subscriber.Uuid = Subscriber.Uuid(id)
+    fun update(
+        username: String?,
+        enabled: Boolean?,
+        passwordHash: String? = null
+    ): SubscriberEntity = SubscriberEntity(
+        id,
+        username ?: this.username,
+        passwordHash ?: this.password,
+        enabled ?: this.enabled
+    )
 }

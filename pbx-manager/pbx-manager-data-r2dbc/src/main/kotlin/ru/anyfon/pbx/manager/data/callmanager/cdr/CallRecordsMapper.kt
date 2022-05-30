@@ -5,7 +5,7 @@ import ru.anyfon.common.util.ConvertUtils
 import ru.anyfon.pbx.common.domain.type.ExecutionStatus
 import ru.anyfon.pbx.common.domain.type.IP
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
-import ru.anyfon.pbx.common.domain.type.TenantID
+import ru.anyfon.pbx.common.domain.type.Tenant
 import ru.anyfon.pbx.manager.domain.callmanager.AppName
 import ru.anyfon.pbx.manager.domain.callmanager.CallID
 import ru.anyfon.pbx.manager.domain.callmanager.CommandName
@@ -33,7 +33,7 @@ class CallRecordsMapper(
                 record.timestamp ?: throw NullPointerException(),
                 PhoneNumber.Any(record.fromNumber),
                 PhoneNumber.Any(record.toNumber),
-                TenantID(record.tenantId),
+                Tenant.ID(record.tenantId),
                 Subscriber.Uuid(record.subscriberId),
                 record.sourceIpV4?.let { ConvertUtils.tryOrNull { IP.V4(it) } },
                 record.sourceIpV4?.let { ConvertUtils.tryOrNull { IP.V6(it) } },

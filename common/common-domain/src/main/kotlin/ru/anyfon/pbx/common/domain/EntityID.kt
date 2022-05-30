@@ -15,17 +15,12 @@ interface EntityID<Type : Any> : Value<Type> {
     }
 
     abstract class AsString(
-        id: String?,
+        id: Any?,
         pattern: String? = null
     ) : EntityID<String>, Value.AsString(id, pattern)
 
     abstract class AsUuidString(
-        uuid: String?
-    ) : AsString(uuid, UUID_PATTERN) {
-        companion object {
-            const val UUID_PATTERN = "[a-zA-Z0-9\\-]{36}"
-            const val EMPTY_UUID = "00000000-0000-0000-0000-000000000000"
-        }
-    }
+        uuid: Any?
+    ) : Value.AsUuidString(uuid), EntityID<String>
 
 }

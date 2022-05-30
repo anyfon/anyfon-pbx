@@ -2,13 +2,13 @@ package ru.anyfon.pbx.manager.domain.callmanager.cdr.descriptor
 
 import ru.anyfon.pbx.common.domain.type.IP
 import ru.anyfon.pbx.common.domain.type.PhoneNumber
-import ru.anyfon.pbx.common.domain.type.TenantID
+import ru.anyfon.pbx.common.domain.type.Tenant
 import ru.anyfon.pbx.manager.domain.callmanager.cdr.CallRecordParams
 import ru.anyfon.pbx.manager.domain.subscriber.Subscriber
 import java.time.LocalDateTime
 
 class CallRecordParamsBuilder(
-    private val tenantId: TenantID,
+    private val tenantId: Tenant.ID,
     private val subscriberUuid: Subscriber.Uuid,
     private val fromNumber: PhoneNumber.Any,
     private val toNumber: PhoneNumber.Any,
